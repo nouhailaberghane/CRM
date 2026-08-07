@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f4f7f5;
+  --bg-elevated: #ffffff;
+  --fg: #1f2a24;
+  --muted: #5f6f66;
+  --border: #d7e3db;
+  --primary: #2f6f4e;
+  --primary-soft: #e7f2eb;
+  --primary-strong: #245a3f;
+  --accent: #8fbf9f;
+  --danger: #b42318;
+  --shadow: 0 10px 30px rgba(31, 42, 36, 0.06);
+}
+
+.dark {
+  --bg: #121816;
+  --bg-elevated: #1a221e;
+  --fg: #eef4f0;
+  --muted: #a3b4aa;
+  --border: #2c3a32;
+  --primary: #6fbf91;
+  --primary-soft: #22362c;
+  --primary-strong: #8fd4ab;
+  --accent: #4d8f68;
+  --danger: #f97066;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--fg);
+  background:
+    radial-gradient(circle at top left, rgba(143, 191, 159, 0.18), transparent 28%),
+    radial-gradient(circle at 90% 20%, rgba(47, 111, 78, 0.08), transparent 25%),
+    var(--bg);
+  font-family: "Cairo", "Segoe UI", Tahoma, sans-serif;
+}
+
+h1,
+h2,
+.display {
+  font-family: "Amiri", "Cairo", serif;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+@layer components {
+  .panel {
+    @apply rounded-2xl border;
+    background: var(--bg-elevated);
+    border-color: var(--border);
+    box-shadow: var(--shadow);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition;
+  }
+
+  .btn-primary {
+    @apply btn text-white;
+    background: var(--primary);
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-strong);
+  }
+
+  .btn-secondary {
+    @apply btn border;
+    background: var(--bg-elevated);
+    border-color: var(--border);
+    color: var(--fg);
+  }
+
+  .btn-secondary:hover {
+    background: var(--primary-soft);
+  }
+
+  .input {
+    @apply w-full rounded-xl border px-3.5 py-2.5 text-sm outline-none transition;
+    background: var(--bg-elevated);
+    border-color: var(--border);
+    color: var(--fg);
+  }
+
+  .input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(47, 111, 78, 0.15);
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-medium;
+    color: var(--muted);
+  }
+
+  .kpi-value {
+    @apply text-3xl font-semibold tracking-tight;
+  }
+
+  .table-wrap {
+    @apply overflow-x-auto;
+  }
+
+  table.data {
+    @apply w-full min-w-[720px] text-right text-sm;
+  }
+
+  table.data th {
+    @apply px-4 py-3 font-semibold;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  table.data td {
+    @apply px-4 py-3;
+    border-bottom: 1px solid var(--border);
+  }
+
+  table.data tr:hover td {
+    background: var(--primary-soft);
+  }
+}

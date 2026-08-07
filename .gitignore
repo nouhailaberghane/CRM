@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+backend/.venv/
+frontend/.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Env & secrets
+.env
+.env.local
+backend/.env
+frontend/.env.local
+
+# Databases & backups
+*.db
+*.sqlite3
+backups/
+backend/haircare.db
+
+# Build
+frontend/.next/
+frontend/out/
+dist/
+build/
+.coverage
+htmlcov/
+
+# IDE / OS
+.DS_Store
+.idea/
+.vscode/
+*.log
+.turbo/

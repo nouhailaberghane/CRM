@@ -61,12 +61,13 @@ async def list_advisors(
     query = select(Advisor).options(selectinload(Advisor.user))
     count_query = select(func.count()).select_from(Advisor)
     if search:
-        like = f"%{search}%"
+        like = f"%{search.strip()}%"
         filter_clause = (
             Advisor.first_name.ilike(like)
             | Advisor.last_name.ilike(like)
             | Advisor.phone.ilike(like)
             | Advisor.advisor_code.ilike(like)
+            | func.concat(Advisor.first_name, " ", Advisor.last_name).ilike(like)
         )
         query = query.where(filter_clause)
         count_query = count_query.where(filter_clause)

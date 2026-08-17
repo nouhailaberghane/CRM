@@ -118,13 +118,14 @@ async def list_customers(
     query = select(Customer).options(selectinload(Customer.advisor)).where(Customer.deleted_at.is_(None))
     count_query = select(func.count()).select_from(Customer).where(Customer.deleted_at.is_(None))
 
-    # Espace commun conseillère : pas de filtre par conseillère
+    # Conseillère individuelle : uniquement ses clientes.
+    # Espace commun / admin / manager : peuvent filtrer par advisor_id.
     if user.role == UserRole.advisor and not is_shared_advisor_workspace(user):
         if not user.advisor:
             raise HTTPException(status_code=400, detail="Advisor profile missing")
         query = query.where(Customer.advisor_id == user.advisor.id)
         count_query = count_query.where(Customer.advisor_id == user.advisor.id)
-    elif user.role != UserRole.advisor and advisor_id is not None:
+    elif advisor_id is not None:
         query = query.where(Customer.advisor_id == advisor_id)
         count_query = count_query.where(Customer.advisor_id == advisor_id)
 
